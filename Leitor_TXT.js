@@ -2,12 +2,14 @@ const fs = require('fs');
 const util = require('util');
 
 function lerArquivo() {
-    const readline = require('readline').createInterface({
-        input: process.stdin,
-        output: process.stdout
-    });
+    const nomeDoArquivo = 'arq-novo.txt';
+    //const readline = require('readline').createInterface({
+        //input: process.stdin,
+        //output: process.stdout
+    //});
+    //cd /c/Users/edson/OneDrive/Área\ de\ Trabalho/Analise-de-Desempenho
 
-    readline.question("Digite o nome do arquivo: ", (nomeDoArquivo) => {
+    //readline.question("Digite o nome do arquivo: ", (nomeDoArquivo) => {
         try {
             const conteudo = fs.readFileSync(nomeDoArquivo, 'utf-8').split('\n');
             const lista = conteudo[0].trim().split(' ').map(Number);
@@ -32,10 +34,9 @@ function lerArquivo() {
             }
         } catch (error) {
             console.log(`O arquivo ${nomeDoArquivo} não foi encontrado.`);
-        } finally {
-            readline.close();
+        } //finally {
+            //readline.close();
         }
-    });
-}
+    //};
 
 lerArquivo();

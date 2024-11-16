@@ -1,7 +1,15 @@
+import time
+import psutil
+
 def ler_arquivo():
-    nome_do_arquivo = input("Digite o nome do arquivo: ")
+    nome_do_arquivo = 'arq-novo.txt'
+    #nome_do_arquivo = input("Digite o nome do arquivo: ")
     
     try:
+        # Marcar o tempo de início
+        start_time = time.time()
+        start_cpu = psutil.cpu_times()
+
         with open(nome_do_arquivo, 'r', encoding='utf-8-sig') as arquivo:
             linhas = arquivo.readlines()
         
@@ -26,7 +34,18 @@ def ler_arquivo():
             
             elif comando == 'P':
                 print(lista)
-    
+
+        end_time = time.time()
+        end_cpu = psutil.cpu_times()
+        
+        real_time = end_time - start_time
+        user_time = end_cpu.user - start_cpu.user
+        sys_time = end_cpu.system - start_cpu.system
+
+        print(f"real\t{real_time:.4f} segundos")
+        print(f"user\t{user_time:.4f} segundos")
+        print(f"sys\t{sys_time:.4f} segundos")
+
     except FileNotFoundError:
         print(f"O arquivo {nome_do_arquivo} não foi encontrado.")
 

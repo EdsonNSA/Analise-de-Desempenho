@@ -1,7 +1,8 @@
 <?php
 function lerArquivo() {
-    echo "Digite o nome do arquivo: ";
-    $nomeDoArquivo = trim(fgets(STDIN));
+    $nomeDoArquivo = 'arq-novo.txt';
+    //echo "Digite o nome do arquivo: ";
+    //$nomeDoArquivo = trim(fgets(STDIN));
 
     if (!file_exists($nomeDoArquivo)) {
         echo "O arquivo $nomeDoArquivo não foi encontrado.\n";
