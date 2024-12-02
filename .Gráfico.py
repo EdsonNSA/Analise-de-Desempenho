@@ -30,4 +30,5 @@ for i, (valores_graf, cor, ylabel, titulo) in enumerate(zip(valores, cores, ylab
                     ha='center', va='bottom')
 
 plt.tight_layout()
+plt.savefig('a.png')
 plt.show()
