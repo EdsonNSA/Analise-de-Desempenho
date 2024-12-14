@@ -30,7 +30,7 @@ print(f"Processador: {cpuinfo.get_cpu_info()['brand_raw']}")
 
 print(f"Memória RAM total: {psutil.virtual_memory().total / (1024 ** 3):.2f} GB")  
 
-entrada = 'arq.txt'
+entrada = 'arq-desafio.txt'
 saida = 'ordenado_seletion_py.txt'
 
 inicio_tempo = time.time()

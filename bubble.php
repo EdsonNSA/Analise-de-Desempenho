@@ -33,7 +33,7 @@ $memoriaTotal = trim(shell_exec('wmic computersystem get TotalPhysicalMemory | f
 $memoriaTotalGB = round($memoriaTotal / (1024 ** 3), 2);
 echo "Memória RAM total: " . $memoriaTotalGB . " GB\n";
 
-$arquivoEntrada = 'arq.txt';
+$arquivoEntrada = 'arq-desafio.txt';
 $arquivoSaida = 'ordenado_bubble_php.txt';
 
 $inicioTempo = microtime(true);
