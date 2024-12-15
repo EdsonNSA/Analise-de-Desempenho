@@ -2,6 +2,8 @@ import time
 import psutil
 import platform
 import cpuinfo
+import subprocess
+
 
 def bubble_sort(numeros):
     for i in range(len(numeros) - 1):
@@ -17,13 +19,18 @@ def arquivo_ordenado(caminho, numeros):
     with open(caminho, 'w') as arquivo:
         arquivo.writelines(f"{num}\n" for num in numeros)
 
+def obter_info_lscpu():
+        cpu_info = subprocess.check_output("lscpu", shell=True, text=True)
+        return cpu_info
 
 print(f"Linguagem: Python {platform.python_version()}")
 
 info_sistema = platform.uname()
 print(f"Sistema: {info_sistema.system} {info_sistema.release}")
 
-print(f"Processador: {cpuinfo.get_cpu_info()['brand_raw']}")
+print("processador:")
+
+print(obter_info_lscpu())
 
 print(f"Memória RAM total: {psutil.virtual_memory().total / (1024 ** 3):.2f} GB")  
 

@@ -13,24 +13,25 @@ function bubbleSort(&$numeros) {
 }
 
 function lerArquivo($caminho) {
-
     $conteudo = file($caminho, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
     return array_map('intval', $conteudo);
 }
 
 function arquivo_ordenado($caminho, $numeros) {
-
     file_put_contents($caminho, implode(PHP_EOL, $numeros));
+}
+
+function obterInfoProcessador() {
+    return shell_exec('lscpu');
 }
 
 echo "Linguagem: PHP " . PHP_VERSION . "\n";
 echo "Sistema: " . PHP_OS . " - " . php_uname('r') . "\n";
 
-$processador = trim(shell_exec('powershell -Command "Get-WmiObject Win32_Processor | Select-Object -ExpandProperty Name"'));
-echo "Processador: " . $processador . "\n";
+echo "Processador:\n" . obterInfoProcessador() . "\n";
 
-$memoriaTotal = trim(shell_exec('wmic computersystem get TotalPhysicalMemory | findstr /v "TotalPhysicalMemory"'));
-$memoriaTotalGB = round($memoriaTotal / (1024 ** 3), 2);
+$memoriaTotalKB = trim(shell_exec("grep MemTotal /proc/meminfo | awk '{print $2}'"));
+$memoriaTotalGB = round($memoriaTotalKB / 1024 / 1024, 2);
 echo "Memória RAM total: " . $memoriaTotalGB . " GB\n";
 
 $arquivoEntrada = 'arq-desafio.txt';
