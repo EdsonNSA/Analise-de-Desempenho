@@ -1,4 +1,5 @@
 import time
+import tracemalloc
 
 def ordenacao_rapida(lista):
 
@@ -14,21 +15,27 @@ def ordenacao_rapida(lista):
 
 
 def ordenar_arquivo(arquivo_entrada, arquivo_saida):
-   
+
     with open(arquivo_entrada, 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
     
     numeros = [int(linha.strip()) for linha in linhas]
     
+    tracemalloc.start()
+    
     inicio = time.time()
     linhas_ordenadas = ordenacao_rapida(numeros)
     fim = time.time()
     
+    memoria_usada = tracemalloc.get_traced_memory()
+    tracemalloc.stop()
+
+    memoria_usada_kb = memoria_usada[1] / 1024
+    
     with open(arquivo_saida, 'w', encoding='utf-8') as arquivo:
         arquivo.write("\n".join(map(str, linhas_ordenadas)))
     
-    return fim - inicio
-
+    return fim - inicio, memoria_usada_kb
 
 
 print("Escolha um arquivo para ordenar:")
@@ -47,9 +54,7 @@ escolha = input("Digite o número correspondente: ")
 if escolha in opcoes:
     arquivo_entrada, arquivo_saida = opcoes[escolha]
     
-    tempo_execucao = ordenar_arquivo(arquivo_entrada, arquivo_saida)
+    tempo_execucao, memoria_usada = ordenar_arquivo(arquivo_entrada, arquivo_saida)
     print(f"Arquivo '{arquivo_saida}' gerado com sucesso!")
     print(f"Tempo de execução: {tempo_execucao:.4f} segundos")
-
-
-
+    print(f"Memória usada: {memoria_usada:.2f} KB")
