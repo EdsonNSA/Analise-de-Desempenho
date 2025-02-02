@@ -55,3 +55,17 @@ fim_tempo = time.time()
 print(f"Números ordenados foram salvos em '{saida}'.")
 print(f"Tempo de execução: {round((fim_tempo - inicio_tempo) * 1000, 2)} ms")
 print(f"Memória utilizada: {round(mem_fim - mem_inicio, 2)} KB")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
